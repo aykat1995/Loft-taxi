@@ -1,0 +1,40 @@
+.header__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px 27px;
+  background-color: #1C1A19;
+}
+.header__nav ul {
+  list-style: none;
+  display: flex;
+}
+.header__nav li {
+  margin-right: 35px;
+}
+.header__nav li:last-child {
+  margin-right: 0;
+}
+.header__nav-item {
+  font-size: 21px;
+  line-height: 25px;
+  color: #fff;
+  border: none;
+  background-color: #1C1A19;
+  cursor: pointer;
+}
+.header__nav-item:hover {
+  color: #FDBF5A;
+}
+.header__logo {
+  display: flex;
+  align-items: center;
+}
+.logo__text {
+  font-family: 'Blade Runner Movie Font', sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 36px;
+  margin-left: 15px;
+}
+
