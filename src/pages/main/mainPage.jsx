@@ -1,33 +1,49 @@
 import React from 'react';
 import Header from '../../components/Header/header.jsx';
 import MapPage from '../map/mapPage.jsx';
-import ProfilePage from '../profile/profilePage.jsx';
-import AuthPage from '../login/authPage.jsx';
+import { ProfileWithAuth } from '../profile/profilePage.jsx';
+import FormOfAuth from '../../components/Form/formOfAuth.jsx';
+import { WithAuth } from '../../AuthContext.jsx';
+import './mainPage.css'
 
 const PAGES = {
-  map: <MapPage />,
-  profile: <ProfilePage />,
-  login: <AuthPage />
+  profile: (props) => <ProfileWithAuth {...props}/>,
+  login: (props) => <FormOfAuth {...props}/>
 }
 
-export default class Main extends React.Component {
+export class Main extends React.Component {
 
   state = { 
     currentPage: 'map'
   };
 
   navigateTo = (page) => {
-    this.setState({ currentPage: page});
+    if(this.props.isLoggedIn) {
+      this.setState({ currentPage: page});
+    } else {
+      this.setState({ currentPage: 'login'});
+    }
   };
 
   render() {
     return <>
       <Header navigateTo={this.navigateTo}/>
-      <main>
-        <section>
-          {PAGES[this.state.currentPage]}
+      <main className='main'>
+        <section className='main__content'>
+          <MapPage />
+          { 
+          PAGES[this.state.currentPage] && (
+            <div className="window-modal" onClick={() => {this.navigateTo('map')}}>
+              <div className="window-modal__content" onClick={(e) => {e.stopPropagation()}}>
+                {PAGES[this.state.currentPage]({navigate: this.navigateTo})}
+              </div>            
+            </div> 
+            )
+          }                   
         </section>
       </main>
     </>
   }
 }
+
+export const MainWithAuth = WithAuth(Main);

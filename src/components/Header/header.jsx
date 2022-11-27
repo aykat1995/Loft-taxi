@@ -1,7 +1,16 @@
 import React from 'react'
+import { AuthContext } from '../../AuthContext.jsx'
 import './header.css'
 
 export default function Header (props) {
+
+  const {logOut} = React.useContext(AuthContext)
+
+  const unauthenticate = () => {
+    console.log('выход')
+    logOut()
+  }
+
   return (
     <>
     <div className='header__wrapper'>
@@ -18,7 +27,7 @@ export default function Header (props) {
             <button onClick={() => {props.navigateTo("profile")}} className='header__nav-item'>Профиль</button>
           </li>
           <li>
-            <button onClick={() => {props.navigateTo("login")}} className='header__nav-item'>Выйти</button>
+            <button onClick={unauthenticate} className='header__nav-item'>Выйти</button>
           </li>
         </ul>
       </nav>

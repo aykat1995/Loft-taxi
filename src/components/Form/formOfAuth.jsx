@@ -1,23 +1,38 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../AuthContext.jsx'
 import './form.css'
+import Input from '@mui/material/Input'
 
-export default function FormOfAuth({setLogin, setForm}) {
-  return (
-    <div className="auth__form form__wrapper">
-      <form action="#" className="form auth-form">
-        <h3 className="form__title auth-form__title">Войти</h3>
+export default function FormOfAuth(props) {
 
-        <label htmlFor="email" className="form__span">Email</label>
-        <input id="email" name="email" type="email" className="input form__input" placeholder="mail@mail.ru"/>
+  const {logIn, isLoggedIn} = useContext(AuthContext)
 
-        <label htmlFor="password" className="form__span">Пароль</label>
-        <input id="password" name="password" type="password" className="input form__input" placeholder="*********"/>
+  const authenticate = (event) => {
+    event.preventDefault()
+    const { email, password } = event.target;
+    console.log(isLoggedIn)
+    logIn(email.value, password.value).catch(error => {alert('Неправильные учетные данные')})
+    console.log(isLoggedIn)
+  }
 
-        <span className="subtitle subtitle-forgot">Забыли пароль?</span>
-        <button onClick={() => setLogin(true)} type="submit" className="form__btn btn">Войти</button>
+    return (
+      <>
+        <div className="auth__form form__wrapper">
+        <form onSubmit={authenticate} className="form auth-form">
+          <h3 className="form__title auth-form__title">Войти</h3>
 
-        <span className="subtitle">Новый пользователь? <a onClick={() => setForm('reg')} href='#' className='subtitle-link'>Регистрация</a></span>
-      </form>
-    </div>
-  )
-}
+          <label htmlFor="email" className="form__span">Email</label>
+          <Input id="email" name="email" type="email" className="form__input" placeholder="mail@mail.ru"/>
+
+          <label htmlFor="password" className="form__span">Пароль</label>
+          <Input id="password" name="password" type="password" className="form__input" placeholder="*********"/>
+
+          <span className="subtitle subtitle-forgot">Забыли пароль?</span>
+          <button type="submit" className="form__btn btn">Войти</button>
+
+          <span className="subtitle">Новый пользователь? <a onClick={() => props.setForm('reg')} href='#' className='subtitle-link'>Регистрация</a></span>
+        </form>
+      </div>
+    </>
+    )   
+} 

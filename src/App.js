@@ -1,17 +1,17 @@
-import React, { useState} from 'react';
+import React, { useEffect} from 'react';
 import './App.css';
 
-import AuthPage from './pages/login/authPage.jsx';
-import Main from './pages/main/mainPage.jsx'
+import { AuthPage } from './pages/login/authPage.jsx';
+import { WithAuth } from './AuthContext.jsx';
+import { MainWithAuth } from './pages/main/mainPage.jsx'
 
-function App() {
-  const [login, setLogin] = useState(false)
+function App(props) {
 
   return (
-    <div className="App">
-      {login ? <Main /> : <AuthPage setLogin={setLogin}/>}
+    <div className="App">      
+      { props.isLoggedIn? <MainWithAuth /> : <AuthPage /> }
     </div>
   )
 }
 
-export default App;
+export default WithAuth(App);
