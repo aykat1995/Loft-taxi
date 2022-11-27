@@ -1,6 +1,11 @@
 import React from 'react'
 import { AuthContext } from '../../AuthContext.jsx'
 import './header.css'
+import PropTypes from 'prop-types'
+
+Header.propTypes = {
+  navigateTo: PropTypes.func
+}
 
 export default function Header (props) {
 

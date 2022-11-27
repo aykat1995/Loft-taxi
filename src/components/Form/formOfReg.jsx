@@ -1,5 +1,10 @@
 import React from 'react'
 import './form.css'
+import PropTypes from 'prop-types'
+
+FormOfReg.propTypes = {
+  setForm: PropTypes.func
+}
 
 export default function FormOfReg({setForm}) {
   return (

@@ -2,6 +2,11 @@ import React, { useContext } from 'react'
 import { AuthContext } from '../../AuthContext.jsx'
 import './form.css'
 import Input from '@mui/material/Input'
+import PropTypes from 'prop-types'
+
+FormOfAuth.propTypes = {
+  setForm: PropTypes.func
+}
 
 export default function FormOfAuth(props) {
 
