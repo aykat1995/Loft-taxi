@@ -3,18 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AuthProvider } from './AuthContext.jsx';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from 'loft-taxi-mui-theme';
+import { BrowserRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { store } from './store'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthProvider>
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
-        <App />
+        <Provider store={store}>
+          <App />
+        </Provider>        
       </ThemeProvider>
-    </AuthProvider> 
+    </BrowserRouter>
   </React.StrictMode>
 );
 

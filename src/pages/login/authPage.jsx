@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import './auth.css'
-import FormOfAuth from '../../components/Form/formOfAuth.jsx'
+import {FormWithAuth} from '../../components/Form/formOfAuth.jsx'
 import FormOfReg from '../../components/Form/formOfReg.jsx'
-import { WithAuth } from '../../AuthContext.jsx'
 
-export function AuthPagePrimary() {
+export default function AuthPage() {
 
   const [form, setForm] = useState('auth')
 
@@ -15,10 +14,11 @@ export function AuthPagePrimary() {
             <img src="logo-text.png" alt="LoftTaxi" className="logo__text" />
           </div>
           <div className="auth__right">
-            {form === 'auth' ? <FormOfAuth setForm={setForm}/> : <FormOfReg setForm={setForm}/> }
+            {form === 'auth' ? <FormWithAuth setForm={setForm}/> : <FormOfReg setForm={setForm}/> }
           </div>
         </div>  
     )
 }
 
-export const AuthPage = WithAuth(AuthPagePrimary)
+
+

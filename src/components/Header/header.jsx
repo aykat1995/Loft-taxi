@@ -1,19 +1,19 @@
 import React from 'react'
-import { AuthContext } from '../../AuthContext.jsx'
 import './header.css'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom';
+
+import { connect } from 'react-redux'
+import { logOut } from '../../actions.js'
 
 Header.propTypes = {
   navigateTo: PropTypes.func
 }
 
-export default function Header (props) {
-
-  const {logOut} = React.useContext(AuthContext)
+export function Header (props) {
 
   const unauthenticate = () => {
-    console.log('выход')
-    logOut()
+    props.logOut()
   }
 
   return (
@@ -26,13 +26,13 @@ export default function Header (props) {
       <nav className="header__nav">
         <ul>
           <li>
-            <button onClick={() => {props.navigateTo("map")}} className='header__nav-item'>Карта</button>
+            <Link to='/map' className='header__nav-item'>Карта</Link>
           </li>
           <li>
-            <button onClick={() => {props.navigateTo("profile")}} className='header__nav-item'>Профиль</button>
+            <Link to='/profile' className='header__nav-item'>Профиль</Link>
           </li>
           <li>
-            <button onClick={unauthenticate} className='header__nav-item'>Выйти</button>
+            <Link to='/' onClick={unauthenticate} className='header__nav-item'>Выйти</Link>
           </li>
         </ul>
       </nav>
@@ -41,3 +41,8 @@ export default function Header (props) {
     
   )
 }
+
+export default connect(
+  null,
+  { logOut }
+)(Header)

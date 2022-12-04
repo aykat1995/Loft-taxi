@@ -1,15 +1,29 @@
 import React from 'react'
-import { WithAuth } from '../../AuthContext.jsx'
 import './profile.css'
+import { logOut } from '../../actions.js'
+import MapPage from '../map/mapPage.jsx'
+import { Route } from 'react-router-dom'
+
+import {connect} from 'react-redux'
 
 export const ProfilePage = () => {
   return (
     <>
     <div className="profile__wrapper">
-      <h1 className="profile__title">Профиль</h1>
+      {   <MapPage /> && (
+            <div className="window-modal" onClick={() => <Route path='/map'/>}>
+              <div className="window-modal__content" onClick={(e) => {e.stopPropagation()}}>
+                <h1>Профиль</h1>
+              </div>            
+            </div> 
+            )
+      }                   
     </div>
     </>
   )
 }
 
-export const ProfileWithAuth = WithAuth(ProfilePage)
+export const ProfileWithAuth = connect(
+  null,
+  { logOut }
+)(ProfilePage)

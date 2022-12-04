@@ -1,23 +1,21 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../../AuthContext.jsx'
+import React from 'react'
 import './form.css'
 import Input from '@mui/material/Input'
 import PropTypes from 'prop-types'
+
+import { connect } from 'react-redux'
+import { logIn } from '../../actions.js'
 
 FormOfAuth.propTypes = {
   setForm: PropTypes.func
 }
 
-export default function FormOfAuth(props) {
-
-  const {logIn, isLoggedIn} = useContext(AuthContext)
+export function FormOfAuth(props) {
 
   const authenticate = (event) => {
     event.preventDefault()
     const { email, password } = event.target;
-    console.log(isLoggedIn)
-    logIn(email.value, password.value).catch(error => {alert('Неправильные учетные данные')})
-    console.log(isLoggedIn)
+    props.logIn(email.value, password.value)
   }
 
     return (
@@ -41,3 +39,9 @@ export default function FormOfAuth(props) {
     </>
     )   
 } 
+
+
+export const FormWithAuth = connect(
+  (state) => ({isLoggedIn: state.auth.isLoggedIn}),
+  { logIn }  
+  )(FormOfAuth)
