@@ -1,16 +1,18 @@
 import React from 'react'
 import './App.css'
 
-import AuthPage from './pages/login/authPage.jsx'
-import Main from './pages/main/mainPage.jsx'
+import Unauthorized from './pages/login/Unauthorized.jsx'
+import Authorized from './pages/main/Authorized.jsx'
 
 import {connect} from 'react-redux'
+import { Route } from 'react-router-dom'
+import {PrivateRoute} from './PrivateRoute.jsx'
 
 export function App(props) {
 
   return (
     <div className="App"> 
-      { props.isLoggedIn ? <Main/> : <AuthPage/> }
+      { props.isLoggedIn ? <Authorized/> : <Route exact path='/' component={Unauthorized}/> }
     </div>
   )
 }

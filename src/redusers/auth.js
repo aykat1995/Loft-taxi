@@ -10,7 +10,7 @@ export default function(state = initialState, action) {
         return {isLoggedIn: true}
       } else {
         alert('Некорректные данные')
-        return
+        return state
       }      
       //return {isLoggedIn: true}
     }

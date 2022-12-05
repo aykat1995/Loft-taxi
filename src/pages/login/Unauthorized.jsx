@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import './auth.css'
+import './Unauthorized.css'
 import {FormWithAuth} from '../../components/Form/formOfAuth.jsx'
 import FormOfReg from '../../components/Form/formOfReg.jsx'
 
-export default function AuthPage() {
+export default function Unauthorized() {
 
   const [form, setForm] = useState('auth')
 

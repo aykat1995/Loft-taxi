@@ -1,7 +1,6 @@
 import { authenticate, logIn } from './actions.js'
 import { serverLogin } from './api.js'
 import { AUTHENTICATE } from './actions.js'
-import Main from './pages/main/mainPage.jsx'
 
 export const authMiddleware = (store) => (next) => async (action) => {
   if(action.type === AUTHENTICATE) {
