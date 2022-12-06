@@ -4,7 +4,7 @@ import Input from '@mui/material/Input'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import { logIn } from '../../actions.js'
+import { authenticate } from '../../actions.js'
 
 FormOfAuth.propTypes = {
   setForm: PropTypes.func
@@ -15,7 +15,7 @@ export function FormOfAuth(props) {
   const authenticate = (event) => {
     event.preventDefault()
     const { email, password } = event.target;
-    props.logIn(email.value, password.value)
+    props.authenticate(email.value, password.value)
   }
 
     return (
@@ -43,5 +43,5 @@ export function FormOfAuth(props) {
 
 export const FormWithAuth = connect(
   (state) => ({isLoggedIn: state.auth.isLoggedIn}),
-  { logIn }  
+  { authenticate }  
   )(FormOfAuth)
