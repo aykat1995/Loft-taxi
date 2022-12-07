@@ -1,20 +1,31 @@
-import { LOG_IN, LOG_OUT } from '../actions.js'
+import { logIn, logOut } from "../actions";
+
+const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : "";
+
+const isLoggedIn = localStorage.getItem("isLoggedIn") ? JSON.parse(localStorage.getItem("isLoggedIn")) : false;
 
 const initialState = {
-  isLoggedIn: false,
-  userDatas: ''
-}
+  isLoggedIn: isLoggedIn,
+  token: token,
+  card: {},
+  addresses: [],
+  route: {}
+};
+
+
 export default function(state = initialState, action) {
-  switch(action.type) {
-    case LOG_IN: {
+  switch (action.type) {
+    case logIn.toString(): {
       localStorage.setItem('isLoggedIn', JSON.stringify(true))
-      localStorage.setItem('User datas', JSON.stringify(action.payload))
-      return {isLoggedIn: true, userDatas: action.payload}
+      localStorage.setItem('token', JSON.stringify(action.payload))
+      return { ...state, isLoggedIn: true, token: action.payload}
     }
-    case LOG_OUT: {
-      return {isLoggedIn: false}
+    case logOut.toString(): {
+      localStorage.setItem('isLoggedIn', JSON.stringify(false))
+      localStorage.setItem('token', JSON.stringify(''))
+      return { ...state, isLoggedIn: false, token: '' }
     }
     default:
-      return state
+      return state;
   }
 }
