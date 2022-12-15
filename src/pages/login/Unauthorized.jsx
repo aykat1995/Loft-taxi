@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './Unauthorized.css'
 import {FormWithAuth} from '../../components/Form/formOfAuth.jsx'
-import FormOfReg from '../../components/Form/formOfReg.jsx'
+import {FormRegWithAuth} from '../../components/Form/formOfReg.jsx'
 
 export default function Unauthorized() {
 
@@ -14,7 +14,7 @@ export default function Unauthorized() {
             <img src="logo-text.png" alt="LoftTaxi" className="logo__text" />
           </div>
           <div className="auth__right">
-            {form === 'auth' ? <FormWithAuth setForm={setForm}/> : <FormOfReg setForm={setForm}/> }
+            {form === 'auth' ? <FormWithAuth setForm={setForm}/> : <FormRegWithAuth setForm={setForm}/> }
           </div>
         </div>  
     )

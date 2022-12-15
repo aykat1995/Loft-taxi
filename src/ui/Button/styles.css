@@ -1,0 +1,17 @@
+.btn{
+	font-size: 1.2em;
+	font-weight: 500;
+	border: none;
+	color: #222;
+	background: #FDBF5A;
+	border-radius: 10em;
+	padding: 0.5em;
+	cursor: pointer;
+	transition: 0.2s;
+	user-select: none;
+}
+
+
+.btn:active{
+	transform: scale(0.95);
+}

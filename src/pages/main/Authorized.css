@@ -23,3 +23,100 @@
   position: absolute;
   top: 15%;
 }
+
+/* стили для окна вызова такси */
+.route-wrapper {
+  width: 486px;
+  background: #FFFFFF;
+  box-shadow: 0px 10px 20px -5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  position: absolute;
+  top: 7%;
+  left: 5%;
+  display: none;
+}
+
+.route-wrapper.active {
+  display: block;
+}
+
+.route__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+.route__input {
+  padding: 18px;
+  color: #000;
+  font-size: 18px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #E0E0E0;
+  width: 80%;
+}
+.route__button {
+  background: #FDBF5A;
+  border-radius: 70px;
+  width: 394px;
+  height: 61px;
+  font-size: 24px;
+  color: #000;
+  border: none;
+  cursor: pointer;
+}
+
+.cars__wrapper {
+  width: 100%;
+  margin-top: 23px;
+  box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding-bottom: 40px;
+}
+
+.cars__items {
+  display: flex;
+  justify-content: space-between;
+  padding: 32px 40px;
+}
+.cars__item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+.cars__item:hover {
+  opacity: 1;
+}
+.cars__item.active {
+  opacity: 1;
+}
+.cars__title {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.cars__subtitle {
+  font-size: 11px;
+  line-height: 13px;
+  color: #828282;
+}
+
+.cars__price {
+  font-size: 24px;
+  margin-bottom: 13px;
+}
+
+.cars__img {
+  height: 75px;
+}
+
+.select {
+  position: relative;
+  width: 80%;
+  height: 50px;
+}

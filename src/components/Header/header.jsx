@@ -26,10 +26,10 @@ export function Header (props) {
       <nav className="header__nav">
         <ul>
           <li>
-            <button onClick={() => {props.navigateTo("map")}} className='header__nav-item'>Карта</button>
+            <button onClick={() => {props.navigateTo("map");props.showRouteForm()}} className='header__nav-item'>Карта</button>
           </li>
           <li>
-            <button onClick={() => {props.navigateTo("profile")}} className='header__nav-item'>Профиль</button>
+            <button onClick={() => {props.navigateTo("profile");props.hideRouteForm()}} className='header__nav-item'>Профиль</button>
           </li>
           <li>
             <Link to='/'>

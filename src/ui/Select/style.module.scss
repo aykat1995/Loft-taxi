@@ -1,0 +1,58 @@
+.wrap{
+	position: relative;
+
+
+	.preview, .list{
+		border-bottom: 1px solid #E0E0E0;
+	}
+
+
+
+
+
+	.list{
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		left: 0;
+		bottom: -1em;
+		transform: translateY(100%);
+		overflow: auto;
+		transition: 0.3s;
+		padding: 0;
+		transform-origin: center top;
+		opacity: 0;
+		pointer-events: none;
+		transform: translateY(90%) scaleY(0);
+
+	}
+
+
+
+	.preview{
+		cursor: pointer;
+		padding: 0.5em 1em;
+	}
+
+
+	.item{
+		cursor: pointer;
+		transition: 0.3s;
+
+
+		&[data-active='true']{
+			pointer-events: none;
+		}
+
+	}
+
+	&[data-open='true']{
+		.list{
+			opacity: 1;
+			pointer-events: auto;
+			transform: translateY(100%) scaleY(1);
+		}
+	}
+
+
+}
