@@ -120,3 +120,29 @@
   width: 80%;
   height: 50px;
 }
+
+.ordered__wrapper {
+  position: absolute;
+  top: 9%;
+  left: 27%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  padding: 40px;
+  max-width: 490px;
+}
+
+.ordered__title {
+  font-size: 36px;
+  text-align: left;
+}
+
+.ordered__text {
+  font-size: 18px;
+  color: #7B7B7B;
+  margin: 14px 0 22px;
+  text-align: left;
+}
+
+.ordered__btn {
+  width: 80%;
+}

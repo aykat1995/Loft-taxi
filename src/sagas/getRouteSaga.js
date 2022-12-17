@@ -5,7 +5,7 @@ import { takeEvery, call, put } from 'redux-saga/effects'
 export function* getRouteSaga(action) {
   const { addressOne, addressTwo } = action.payload;
   console.log(addressOne, addressTwo)
-  const data = yield call(serverRoute(addressOne, addressTwo))
+  const data = yield call(serverRoute, addressOne, addressTwo)
   console.log('Route: ' + JSON.stringify(data))
   if (data) {
     yield put(routeReady(data))

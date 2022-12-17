@@ -1,5 +1,5 @@
-import { logIn, logOut, cardLoaded, addressListReady, routeReady, registration } from "../actions";
-
+import { logIn, logOut, cardLoaded, addressListReady, routeReady, registration, changeRouteBoxView } from "../actions";
+import boxView from '../constants.js'
 const token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : "";
 
 const isLoggedIn = localStorage.getItem("isLoggedIn") ? JSON.parse(localStorage.getItem("isLoggedIn")) : false;
@@ -10,7 +10,8 @@ const initialState = {
   card: {},
   addresses: [],
   route: {},
-  registrated: false
+  registrated: false,
+  routeBoxView: boxView.INITIAL
 };
 
 
@@ -40,6 +41,9 @@ export default function(state = initialState, action){
     }
     case registration.toString(): {
       return { ...state, registrated: true }
+    }
+    case changeRouteBoxView.toString(): {
+      return { ...state, routeBoxView: action.payload}
     }
     default:
       return state;

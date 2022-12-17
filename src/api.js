@@ -36,7 +36,7 @@ export const serverRoute = async (address1, address2) => {
     {
       method: "GET"
     }
-  ).then(res => res.json());
+  ).then(res => res.json()).then(data => data);
 };
 
 

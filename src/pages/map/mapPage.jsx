@@ -1,35 +1,45 @@
-import React from 'react'
+import React, { useEffect, createRef, useState, useRef } from 'react'
 import mapboxgl from "mapbox-gl"
+import { connect } from 'react-redux';
+import drawRoute from '../../components/drawRoute/drawRoute.js'
+import { changeRouteBoxView } from '../../actions.js';
 
-class Map extends React.Component {
-  map = null;
-  mapContainer = React.createRef();
+export function MapPage({route,routeBoxView, changeRouteBoxView}) {
+  const map = useRef(null);
+  const mapContainer = createRef();
 
-  componentDidMount() {
+  useEffect(() => {
     mapboxgl.accessToken = 'pk.eyJ1IjoiYWlrYXRjaGFsYmFhIiwiYSI6ImNsYXdoejNtbDAxcHEzcW8wOGsyaTFhbmUifQ.kqCuacaVUwpQz-M9pu1scA';
-    this.map = new mapboxgl.Map({
-      container: this.mapContainer.current,
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
       style: 'mapbox://styles/mapbox/streets-v9',
       center: [30.3056504, 59.9429126],
-      zoom: 10
+      zoom: 12
     })
-  }
+    return () => map.current.remove();
+  }, []);
 
-  componentWillUnmount() {
-    this.map.remove();
-  }
+  useEffect(() => {
+    if (route && route.length > 0) {
+      drawRoute(map.current, route);
+      changeRouteBoxView('INITIAL')
+    }
+    if (route === null) {
+      map.current.removeLayer("route");
+      map.current.removeSource("route");
+    }
+  }, [route]);
 
-  render() {
     return (
-      <div className='map__wrapper'>
-        <div data-testid='map' className="map" ref={this.mapContainer}></div>
-      </div>
+      <>
+        <div className='map__wrapper'>
+          <div data-testid='map' className="map" ref={mapContainer}></div>
+        </div>
+      </>      
     )
-  }
 }
 
-export default function MapPage () {
-  return (
-    <Map/>
-  )
-}
+export default connect(
+  (state) => ({route: state.auth.route, routeBoxView: state.auth.routeBoxView}),
+  {changeRouteBoxView}
+)(MapPage)
