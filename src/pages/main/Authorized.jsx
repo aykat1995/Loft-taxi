@@ -73,7 +73,7 @@ function Authorized(props) {
           PAGES[currentPage] && (
             <div className="window-modal" onClick={() => {setPage('map'); showRouteForm()}}>
               <div className="window-modal__content" onClick={(e) => {e.stopPropagation()}}>
-                {PAGES[currentPage]({navigate: navigateTo})}
+                {PAGES[currentPage]({navigate: navigateTo, showRouteForm: showRouteForm})}
               </div>            
             </div> 
             )

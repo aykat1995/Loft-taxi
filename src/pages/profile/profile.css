@@ -125,3 +125,7 @@
   font-size: 21px;
 }
 
+.modal__wrapper {
+  padding: 80px 100px;
+  background-color: #FFF;
+}
