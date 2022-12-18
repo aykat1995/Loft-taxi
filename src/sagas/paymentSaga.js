@@ -6,9 +6,8 @@ export function* postPaymentSaga(action) {
   const { cardNumber, cardDate, cardName, cvc, token } = action.payload
   console.log('payload of card: ' + JSON.stringify(action.payload))
   const data = yield call(serverPostCard, cardNumber, cardDate, cardName, cvc, token)
-  if (data) {
-    yield put(cardLoaded(data))
-    console.log('payment saga is' + JSON.stringify(data))
+  if (data.success) {
+    yield put(cardLoaded(action.payload))
   } else {
     alert('error: ' + data.error)
   }

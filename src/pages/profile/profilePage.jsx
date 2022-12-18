@@ -2,7 +2,17 @@ import './profile.css'
 import React, {useState, useEffect} from "react"
 import Input from '@mui/material/Input'
 import { connect } from 'react-redux'
-import { postCard } from '../../actions.js'
+import { postCard, cardLoaded } from '../../actions.js'
+
+const placeHolder = (preview, value, simbol) => {
+  Array.from(value).forEach(el => preview = preview.replace(simbol, el) );
+
+  return preview.replace(/(\d?)\D+$/, "$1");
+}
+const regCard = (value) => placeHolder("**** **** **** ****", value.replace(/\D/g, ""), "*");
+const regDate = (value) => placeHolder("**/**", value.replace(/\D/g, ""), "*");
+const regCVC = (value) => value.replace(/\D/g, "").substr(0, 3);
+const regName = (value) => value.replace(/\d/g, "");
 
 function ProfilePage(props) {
 
@@ -12,7 +22,9 @@ function ProfilePage(props) {
   const [name, setName] = useState('');
 
   const {cardData} = props
+
   useEffect(() => {
+    console.log(cardData)
     setName(cardData.cardName);
     setCardNumber(cardData.cardNumber);
     setDate(cardData.cardDate);
@@ -23,10 +35,11 @@ function ProfilePage(props) {
 
   function sendCardData (e) {
     e.preventDefault()
-
     const { cardNumber, cardDate, cardName, cvc } = e.target;
 
-    props.postCard(cardNumber.value, cardDate.value, cardName.value, cvc.value, props.token)
+    let _cardNumber = Number(cardNumber.value.split(' ').join(''))
+
+    props.postCard(_cardNumber, cardDate.value, cardName.value, cvc.value, props.token)
   } 
 
   return (<>
@@ -38,20 +51,20 @@ function ProfilePage(props) {
           <div className="form__group">
             <div className='input__item'>
               <label htmlFor="name" className="form__span">Имя владельца</label>
-              <Input id="name" name="cardName" type="name" value={name} onChange={(e) => setName(e.target.value)}/>
+              <Input id="name" name="cardName" type="name" value={name} onChange={(e) => setName(regName(e.target.value))}/>
             </div>
             <div className='input__item'>
               <label htmlFor="card" className="form__span">Номер карты</label>
-              <Input id="card" name="cardNumber" type="card" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)}/>
+              <Input id="card" name="cardNumber" type="card" value={cardNumber} onChange={(e) => setCardNumber(regCard(e.target.value))}/>
             </div>
             <div className="card-row">
               <div className='input__item'>
                 <label htmlFor="date" className="form__span">MM/YY</label>
-                <Input id="date" name="cardDate" type="text" value={date} onChange={(e) => setDate(e.target.value)}/>
+                <Input id="date" name="cardDate" type="text" value={date} onChange={(e) => setDate(regDate(e.target.value))}/>
               </div>
               <div className='input__item'>
                 <label htmlFor="cvc" className="form__span">CVC</label>
-                <Input id="cvc" name="cvc" type="text" value={cvc} onChange={(e) => setCVC(e.target.value)}/>
+                <Input id="cvc" name="cvc" type="text" value={cvc} onChange={(e) => setCVC(regCVC(e.target.value))}/>
               </div>
             </div>
           </div>
@@ -83,5 +96,5 @@ function ProfilePage(props) {
 
 export const ProfileWithAuth = connect(
   (state) => ({ token: state.auth.token, cardData: state.auth.card}),
-  { postCard }
+  { postCard, cardLoaded }
 )(ProfilePage)
