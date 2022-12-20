@@ -1,4 +1,4 @@
-import React, { useEffect, createRef, useState, useRef } from 'react'
+import React, { useEffect, createRef, useRef } from 'react'
 import mapboxgl from "mapbox-gl"
 import { connect } from 'react-redux';
 import drawRoute from '../../components/drawRoute/drawRoute.js'

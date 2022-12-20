@@ -25,7 +25,6 @@ function ProfilePage(props) {
   const {cardData, navigate} = props
 
   useEffect(() => {
-    console.log(cardData)
     setName(cardData.cardName);
     setCardNumber(cardData.cardNumber);
     setDate(cardData.cardDate);

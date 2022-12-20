@@ -15,10 +15,11 @@ function Authorized(props) {
   }
 
   const [currentPage, setPage] = useState('map');
-  const { addresses, getRoute, routeBoxView, routeReady, changeRouteBoxView } = props;
+  const { addresses, getRoute, routeBoxView, routeReady, changeRouteBoxView, cardInfo, getAddressList } = props;
   const [list, setList] = useState([]);
   const [addressOne, setAddressOne] = useState(null);
   const [addressTwo, setAddressTwo] = useState(null);
+  let selectedCar = document.getElementsByClassName('cars__item')[0];
 
   function navigateTo(page) {
     setPage(page)
@@ -34,36 +35,50 @@ function Authorized(props) {
     form.classList.add("active");
   }
 
+  function showNoCardInfo() {
+    hideRouteForm()
+    let div = document.querySelector('.route-box-no-card')
+    div.classList.add('active')
+  }
+  function hideNoCardInfo() {
+    let div = document.querySelector('.route-box-no-card')
+    div.classList.remove('active')
+  }
+
   //Получаем список адресов из API
 
   useEffect(() => {   
-    props.getAddressList();
+    getAddressList();
   }, [])
 
   useEffect(() => {
     setList(addresses);
   }, [addresses])  
 
-  useEffect(() => {
-    if (routeBoxView === boxView.INITIAL)
-      console.log('INITIAL');
-    else if (routeBoxView === boxView.ORDERED)
-     console.log('ORDERED');
-    else console.log('OTHER')
-  }, [routeBoxView]) 
-
   //Получаем route
 
   function getRouteFromAPI() {
-    getRoute(addressOne, addressTwo);
+    if (JSON.stringify(cardInfo) != '{}') getRoute(addressOne, addressTwo)
+    else showNoCardInfo();
   }
 
   function newOrder() {
     routeReady(null)
     changeRouteBoxView(boxView.INITIAL);
+    selectedCar = document.getElementsByClassName('cars__item')[0]
   };
 
+  function activeCarItem(e) {
+    let item = e.target.closest('div');
+    if (!item) return;
+    selectedCar.classList.remove('active')
+
+    selectedCar = item;
+    selectedCar.classList.add('active')
+  }
+
    return <>
+    <div className='block'>
       <Header hideRouteForm={hideRouteForm} showRouteForm={showRouteForm} navigateTo={navigateTo}/>
       <main className='main'>
         <section className='main__content'>
@@ -110,7 +125,7 @@ function Authorized(props) {
                   </div>                     
 
                   <div className="cars__wrapper">
-                    <div className="cars__items">
+                    <div className="cars__items" onClick={e => activeCarItem(e)}>
                       <div className="cars__item active">
                         <span className="cars__title">Стандарт</span>
                         <span className="cars__subtitle">Стоимость</span>
@@ -130,13 +145,34 @@ function Authorized(props) {
                         <img src="cars-3.jpg" alt="" className="cars__img" />
                       </div>
                     </div>
-                    <button className="route__button" id="routeButton" variant="contained" onClick={() => getRouteFromAPI()}>Заказать</button>
+                    <button className="route__button btn" id="routeButton" variant="contained" onClick={() => getRouteFromAPI()}>Заказать</button>
                   </div>
                 </div>
               </div>  
               )}
+
+                <div className="route-box-no-card">
+                  <div className="route-box-no-card-wrapp">
+                    <div className="title">
+                      <div className="title__header">
+                        <h3 className='ordered__title'>Заполните платежные данные</h3>
+                      </div>
+                    </div>
+                    <div className="route-box__content">
+                      <p className='ordered__text'>
+                        Укажите информацию о банковской карте, чтобы сделать заказ.
+                      </p>
+                    </div>
+                    <div className="actions">
+                      <button onClick={() => {setPage('profile'); hideNoCardInfo(); hideRouteForm()}} className='btn ordered__btn'                 >
+                        Перейти в профиль
+                      </button>
+                    </div>
+                  </div>                  
+                </div>
         </section>
       </main>
+    </div>
     </>
 }
 

@@ -1,3 +1,6 @@
+.block {
+  
+}
 .main__content {
   position: relative;
 }
@@ -119,6 +122,7 @@
   position: relative;
   width: 80%;
   height: 50px;
+  margin-top: 10px;
 }
 
 .ordered__wrapper {
@@ -145,4 +149,26 @@
 
 .ordered__btn {
   width: 80%;
+}
+
+.route-box-no-card {
+  display: none;
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+}
+
+.route-box-no-card.active {
+  display: block;
+}
+
+.route-box-no-card-wrapp {
+  padding: 40px 60px;
+  background-color: #fff;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
 }
