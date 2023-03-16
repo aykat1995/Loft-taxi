@@ -149,6 +149,7 @@
 
 .ordered__btn {
   width: 80%;
+  font-weight: bold;
 }
 
 .route-box-no-card {
@@ -171,4 +172,66 @@
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
+}
+
+@media(max-width: 950px) {
+  .route-box-no-card-wrapp {
+    width: 60%;
+  }
+}
+
+@media(max-width: 700px) {
+  .window-modal__content {
+    top: 10%;
+  }
+  .route-wrapper {
+    top: 0;
+    left: 0;
+    width: 100%;    
+  }
+
+  .route__button {
+    width: 300px;
+  }
+  .cars__wrapper {
+    padding-bottom: 20px;
+  }
+  .cars__img {
+    height: 55px;
+  }
+  .cars__price {
+    font-size: 22px;
+  }
+  .cars__items {
+    padding: 14px 35px;
+  }
+
+  .ordered__title {
+    font-size: 24px;
+  }
+  .ordered__btn {
+    font-size: 18px;
+  }
+  .ordered__wrapper {
+    left: 40%;
+    padding: 25px;
+  }
+  .route-box-no-card-wrapp {
+    width: 90%;
+    top: 13%;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 520px) {
+  .ordered__wrapper {
+    width: 80%;
+    left: 47%;
+  }
+}
+
+@media(max-with: 380px) {
+  .cars__items {
+    padding: 14px 26px;
+  }  
 }

@@ -39,3 +39,9 @@
   margin-left: 15px;
 }
 
+@media(max-width: 670px) {
+  .logo__text {
+    display: none;
+  }
+}
+
